@@ -25,6 +25,7 @@ const Button: React.FC<ButtonProps> = ({
 
   const onMouseLeave = () => {
     setIsHovering(false);
+    setIsActive(false);
   };
 
   const onMouseDown = () => {
@@ -46,7 +47,10 @@ const Button: React.FC<ButtonProps> = ({
     <div style={Object.assign(styles.container, containerStyles)}>
       {isLoading ? (
         <div style={styles.button}>
-          <LoadingIndicator color={colors.black} />
+          <LoadingIndicator
+            containerStyles={styles.loading}
+            color={colors.black}
+          />
         </div>
       ) : (
         <button
@@ -57,7 +61,7 @@ const Button: React.FC<ButtonProps> = ({
           onClick={onClick}
           style={buttonStyle}
         >
-          {buttonText.toUpperCase()}
+          <p style={{ paddingTop: 2 }}>{buttonText.toUpperCase()}</p>
         </button>
       )}
     </div>
@@ -70,7 +74,7 @@ const styles = {
     width: "100%",
   },
   button: {
-    height: 32,
+    height: 36,
     backgroundColor: colors.white,
     borderWidth: 0,
     borderStyle: "solid",
@@ -79,6 +83,7 @@ const styles = {
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
+    padding: 0,
     display: "flex",
     outline: "none",
     ...FontStyle.bold,
@@ -88,6 +93,9 @@ const styles = {
   },
   active: {
     backgroundColor: `${colors.white}88`,
+  },
+  loading: {
+    paddingTop: 4,
   },
 };
 
