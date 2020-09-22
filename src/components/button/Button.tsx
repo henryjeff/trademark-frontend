@@ -81,7 +81,7 @@ const styles = {
     alignItems: "center",
     display: "flex",
     outline: "none",
-    ...FontStyle.medium,
+    ...FontStyle.bold,
   },
   hover: {
     backgroundColor: `${colors.white}d8`,

@@ -22,11 +22,11 @@ function App() {
   return (
     <div className="app">
       <div style={styles.form}>
-        <TitleText>TITLE TEXT</TitleText>
+        {/* <TitleText>TITLE TEXT</TitleText>
         <HeaderText>HEADING 1</HeaderText>
         <HeaderText small>HEADING 2</HeaderText>
         <Text>Regular Text</Text>
-        <Subtext containerStyles={{ marginBottom: 20 }}>Subtext</Subtext>
+        <Subtext containerStyles={{ marginBottom: 20 }}>Subtext</Subtext> */}
         <TitleText>SIGN UP</TitleText>
         <HeaderText
           small
