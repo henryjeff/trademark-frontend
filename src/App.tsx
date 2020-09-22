@@ -4,8 +4,8 @@ import UserIcon from "./assets/icons/User.svg";
 import MailIcon from "./assets/icons/Mail.svg";
 import KeyIcon from "./assets/icons/Key.svg";
 
-import Button from "./components/button/Button";
-import TextInput from "./components/input/TextInput";
+import { Button } from "./components/button/";
+import { TextInput } from "./components/input/";
 import {
   TitleText,
   HeaderText,
@@ -13,8 +13,8 @@ import {
   Text,
 } from "../src/components/general";
 import colors from "./constants/Colors";
+import { LoadingIndicator } from "./components/general";
 import { FontStyle, StyleSheet } from "./constants/Styles";
-import LoadingIndicator from "./components/general/LoadingIndicator";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
