@@ -61,7 +61,7 @@ const Button: React.FC<ButtonProps> = ({
           onClick={onClick}
           style={buttonStyle}
         >
-          <p style={{ paddingTop: 2 }}>{buttonText.toUpperCase()}</p>
+          <p>{buttonText.toUpperCase()}</p>
         </button>
       )}
     </div>
@@ -95,7 +95,7 @@ const styles = {
     backgroundColor: `${colors.white}88`,
   },
   loading: {
-    paddingTop: 4,
+    paddingTop: 2,
   },
 };
 

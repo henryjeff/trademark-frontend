@@ -1,10 +1,12 @@
 import React from "react";
 import { StyleSheet, FontStyle } from "../../constants/Styles";
 import colors from "../../constants/Colors";
+import { IconName } from "../../assets/icons";
+import { Icon } from "../general";
 
 export interface TextInputProps {
   containerStyles?: React.CSSProperties;
-  icon?: string;
+  icon?: IconName;
   inputType?: string;
   placeholderText?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -19,7 +21,11 @@ const TextInput: React.FC<TextInputProps> = ({
 }) => {
   return (
     <div style={Object.assign({}, styles.container, containerStyles)}>
-      {icon ? <img style={styles.icon} src={icon} /> : null}
+      {icon ? (
+        <div style={styles.iconContainer}>
+          <Icon style={styles.icon} icon={icon} />{" "}
+        </div>
+      ) : null}
       <input
         type={inputType}
         style={Object.assign({}, styles.input, { textIndent: icon ? 28 : 12 })}
@@ -32,12 +38,12 @@ const TextInput: React.FC<TextInputProps> = ({
 
 const styles: StyleSheet = {
   container: {
-    // position: "relative",
+    position: "relative",
     margin: 8,
     width: "100%",
   },
   input: {
-    paddingTop: 18,
+    paddingTop: 16,
     paddingBottom: 16,
     height: 32,
     boxSizing: "border-box",
@@ -53,9 +59,13 @@ const styles: StyleSheet = {
     ...FontStyle.regular,
   },
   icon: {
-    position: "absolute",
-    top: 12,
+    opacity: 0.5,
     width: 12,
+  },
+  iconContainer: {
+    position: "absolute",
+    display: "flex",
+    height: "100%",
     left: 12,
   },
 };
