@@ -32,16 +32,18 @@ const TextInput: React.FC<TextInputProps> = ({
 
 const styles: StyleSheet = {
   container: {
-    position: "relative",
+    // position: "relative",
     margin: 8,
     width: "100%",
   },
   input: {
-    padding: 0,
+    paddingTop: 18,
+    paddingBottom: 16,
     height: 32,
+    boxSizing: "border-box",
+    lineHeight: 42,
     backgroundColor: "transparent",
     borderWidth: 2,
-    marginLeft: -2, // For border
     borderColor: colors.white,
     borderStyle: "solid",
     borderRadius: 10,
