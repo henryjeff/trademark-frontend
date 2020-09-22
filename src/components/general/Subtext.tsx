@@ -1,25 +1,15 @@
 import React from "react";
-import { StyleSheet, FontStyle } from "../../constants/Styles";
 import colors from "../../constants/Colors";
+import Text, { TextProps } from "./Text";
 
-export interface SubtextProps {
-  containerStyles?: React.CSSProperties;
-}
+export interface SubtextProps extends TextProps {}
 
 const Subtext: React.FC<SubtextProps> = (props) => {
   return (
-    <p style={Object.assign({}, styles.subtext, props.containerStyles)}>
+    <Text fontSize={12} color={colors.gray1} weight="regular" {...props}>
       {props.children}
-    </p>
+    </Text>
   );
-};
-
-const styles: StyleSheet = {
-  subtext: {
-    fontSize: 12,
-    color: colors.gray1,
-    ...FontStyle.regular,
-  },
 };
 
 export default Subtext;

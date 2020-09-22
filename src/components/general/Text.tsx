@@ -1,16 +1,26 @@
 import React from "react";
-import { StyleSheet, FontStyle } from "../../constants/Styles";
+import { StyleSheet, FontStyle, FontWeights } from "../../constants/Styles";
 
 export interface TextProps {
-  containerStyles?: React.CSSProperties;
+  style?: React.CSSProperties;
+  fontSize?: number;
+  color?: string;
+  weight?: FontWeights;
 }
 
 const Text: React.FC<TextProps> = (props) => {
-  return (
-    <p style={Object.assign({}, styles.text, props.containerStyles)}>
-      {props.children}
-    </p>
+  const { fontSize, color, weight } = props;
+
+  const textStyle = Object.assign(
+    {},
+    styles.text,
+    props.style,
+    fontSize && { fontSize: fontSize },
+    color && { color: color },
+    weight && { ...FontStyle[weight] }
   );
+
+  return <p style={textStyle}>{props.children}</p>;
 };
 
 const styles: StyleSheet = {

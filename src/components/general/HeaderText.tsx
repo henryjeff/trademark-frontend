@@ -1,40 +1,16 @@
 import React from "react";
-import { StyleSheet, FontStyle } from "../../constants/Styles";
+import Text, { TextProps } from "./Text";
 
-export interface HeaderTextProps {
+export interface HeaderTextProps extends TextProps {
   small?: boolean;
-  containerStyles?: React.CSSProperties;
-  color?: string;
-  light?: boolean;
-  bold?: boolean;
 }
 
 const HeaderText: React.FC<HeaderTextProps> = (props) => {
   return (
-    <p
-      style={Object.assign(
-        {},
-        props.small ? styles.heading2 : styles.heading1,
-        props.containerStyles,
-        { color: props.color },
-        props.light && { ...FontStyle.regular },
-        props.bold && { ...FontStyle.bold }
-      )}
-    >
+    <Text fontSize={props.small ? 16 : 24} weight={"medium"} {...props}>
       {props.children}
-    </p>
+    </Text>
   );
-};
-
-const styles: StyleSheet = {
-  heading1: {
-    fontSize: 24,
-    ...FontStyle.medium,
-  },
-  heading2: {
-    fontSize: 16,
-    ...FontStyle.medium,
-  },
 };
 
 export default HeaderText;
