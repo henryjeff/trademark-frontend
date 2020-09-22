@@ -16,14 +16,13 @@ import {
   HeaderText,
   Subtext,
   Text,
+  Icon,
+  LoadingIndicator,
 } from "../src/components/general";
 import colors from "./constants/Colors";
-import { LoadingIndicator } from "./components/general";
 import { FontStyle, StyleSheet } from "./constants/Styles";
 
 function App() {
-  const [isLoading, setIsLoading] = useState(false);
-
   return (
     <div className="app">
       <Navbar>
@@ -57,28 +56,26 @@ function App() {
       </Navbar>
       <div style={styles.body}>
         <div style={styles.form}>
-          {/* <TitleText>TITLE TEXT</TitleText>
-          <HeaderText>HEADING 1</HeaderText>
-          <HeaderText small>HEADING 2</HeaderText>
-          <Text>Regular Text</Text>
-          <Subtext containerStyles={{ marginBottom: 20 }}>Subtext</Subtext> */}
           <TitleText>SIGN UP</TitleText>
           <HeaderText small style={{ marginBottom: 20 }} color={colors.gray1}>
             Welcome to the club
           </HeaderText>
           <TextInput
+            icon="User"
             placeholderText="Username"
             onChange={(e) => {
               console.log(e.target.value);
             }}
           />
           <TextInput
+            icon="Mail"
             placeholderText="Email"
             onChange={(e) => {
               console.log("e.target.value");
             }}
           />
           <TextInput
+            icon="Key"
             inputType="password"
             placeholderText="Password"
             onChange={(e) => {
@@ -86,41 +83,60 @@ function App() {
             }}
           />
           <TextInput
+            icon="Key"
             inputType="password"
             placeholderText="Re-type Password"
             onChange={(e) => {
               console.log("e.target.value");
             }}
           />
-          <Button
-            isLoading={isLoading}
-            onClick={() => {
-              setIsLoading(true);
-            }}
-            buttonText="SIGN UP"
-          />
+          <Button buttonText="SIGN UP" />
         </div>
+        {/* <div style={styles.dashboard}>
+          <div style={styles.strategies}>
+            <Text>Strats</Text>
+          </div>
+          <div style={styles.metrics}>
+            <Text>Metrics</Text>
+          </div>
+        </div> */}
       </div>
     </div>
   );
 }
 
 const styles: StyleSheet = {
+  dashboard: {
+    display: "flex",
+    width: "85%",
+    flexGrow: 1,
+    backgroundColor: colors.red,
+  },
+  strategies: {
+    flex: 1,
+    minWidth: 200,
+    backgroundColor: colors.green,
+  },
+  metrics: {
+    flex: 3,
+    backgroundColor: "blue",
+  },
   form: {
-    marginTop: "10vh",
+    marginTop: "-10vh",
     width: "25%",
     textAlign: "center",
     justifyContent: "center",
     alignItems: "center",
     display: "flex",
     flexDirection: "column",
-    // backgroundColor: colors.red,
   },
   body: {
     justifyContent: "center",
-    alignItems: "flex-start",
+    alignItems: "center",
     display: "flex",
+    flexDirection: "column",
     flex: 1,
+    // backgroundColor: "blue",
   },
 };
 

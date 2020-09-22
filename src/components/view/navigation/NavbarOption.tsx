@@ -50,7 +50,7 @@ const styles: StyleSheet = {
     display: "flex",
     alignItems: "center",
     transition: "linear",
-    transitionDuration: "35ms",
+    transitionDuration: "50ms",
   },
   hover: {
     color: colors.black,
