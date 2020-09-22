@@ -2,7 +2,7 @@ export interface StyleSheet {
   [key: string]: React.CSSProperties;
 }
 
-type FontWeights = "regular" | "medium" | "bold" | "black";
+export type FontWeights = "regular" | "medium" | "bold" | "black";
 
 /*
   Font info:
