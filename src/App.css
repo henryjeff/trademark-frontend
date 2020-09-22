@@ -2,9 +2,11 @@
   background-color: #071013;
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
+  /* flex-grow: inherit; */
   width: 100%;
-  align-items: center;
-  justify-content: center;
+  /* align-items: center;
+  justify-content: center; */
 }
 
 .header {
