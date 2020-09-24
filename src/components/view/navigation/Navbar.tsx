@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import colors from "../../../constants/Colors";
-import { StyleSheet, FontStyle } from "../../../constants/Styles";
+import { StyleSheet } from "../../../constants/Styles";
 
 export interface NavbarOptionProps {
   containerStyles?: React.CSSProperties;
@@ -25,7 +25,7 @@ const styles: StyleSheet = {
     display: "flex",
     borderWidth: 0,
     borderBottomWidth: 1,
-    borderColor: colors.gray1,
+    borderColor: `${colors.gray1}48`,
     borderStyle: "solid",
   },
 };

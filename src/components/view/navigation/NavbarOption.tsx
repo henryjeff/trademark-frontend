@@ -1,14 +1,17 @@
 import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import colors from "../../../constants/Colors";
 import { StyleSheet, FontStyle } from "../../../constants/Styles";
 
 export interface NavbarOptionProps {
   containerStyles?: React.CSSProperties;
+  redirectTo?: string;
   onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
 const NavbarOption: React.FC<NavbarOptionProps> = (props) => {
   const [isHovering, setIsHovering] = useState(false);
+  const location = useLocation();
 
   const onMouseEnter = () => {
     setIsHovering(true);
@@ -22,18 +25,21 @@ const NavbarOption: React.FC<NavbarOptionProps> = (props) => {
     {},
     styles.navbarOption,
     props.containerStyles,
-    isHovering && styles.hover
+    isHovering && styles.hover,
+    location.pathname === props.redirectTo && styles.here
   );
 
   return (
-    <div
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-      onClick={props.onClick}
-      style={optionStyle}
-    >
-      {props.children}
-    </div>
+    <Link to={props.redirectTo || undefined} style={styles.routerLink}>
+      <div
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+        onClick={props.onClick}
+        style={optionStyle}
+      >
+        {props.children}
+      </div>
+    </Link>
   );
 };
 
@@ -51,10 +57,16 @@ const styles: StyleSheet = {
     alignItems: "center",
     transition: "linear",
     transitionDuration: "50ms",
+    color: colors.gray1,
   },
   hover: {
-    color: colors.black,
-    backgroundColor: colors.white,
+    backgroundColor: `${colors.gray1}28`,
+  },
+  routerLink: {
+    textDecoration: "none",
+  },
+  here: {
+    color: colors.white,
   },
 };
 
