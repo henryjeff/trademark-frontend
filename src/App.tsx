@@ -1,142 +1,53 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
-import UserIcon from "./assets/icons/User.svg";
-import MailIcon from "./assets/icons/Mail.svg";
-import KeyIcon from "./assets/icons/Key.svg";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+import { useTokenData } from "./store/selectors/AuthSelectors";
+import { StyleSheet } from "./constants/Styles";
 
-import { Button } from "./components/button/";
-import { TextInput } from "./components/input/";
-import {
-  Navbar,
-  NavbarSection,
-  NavbarOption,
-} from "./components/view/navigation";
-import {
-  TitleText,
-  HeaderText,
-  Subtext,
-  Text,
-  Icon,
-  LoadingIndicator,
-} from "../src/components/general";
-import colors from "./constants/Colors";
-import { FontStyle, StyleSheet } from "./constants/Styles";
+// Navigation
+import TopNavigation from "./components/view/navigation/TopNavigation";
+
+// Routes
+import SignUp from "./routes/auth/SignUp";
+import SignIn from "./routes/auth/SignIn";
+import Dashboard from "./routes/home/Dashboard";
+
+function PrivateRoute({ ...rest }: any) {
+  const tokenData = useTokenData();
+  if (!tokenData?.accessToken) {
+    return <Redirect to="/signin" />;
+  }
+  return <Route {...rest} />;
+}
 
 function App() {
   return (
-    <div className="app">
-      <Navbar>
-        <NavbarSection justify="left">
-          <NavbarOption>
-            <Text weight="medium">Dashboard</Text>
-          </NavbarOption>
-          <NavbarOption>
-            <Text weight="medium" color={colors.gray1}>
-              Getting Started
-            </Text>
-          </NavbarOption>
-          <NavbarOption>
-            <Text weight="medium" color={colors.gray1}>
-              Help
-            </Text>
-          </NavbarOption>
-        </NavbarSection>
-        <NavbarSection justify="center">
-          <NavbarOption>
-            <TitleText fontSize={24}>TM</TitleText>
-          </NavbarOption>
-        </NavbarSection>
-        <NavbarSection justify="right">
-          <NavbarOption>
-            <Text weight="medium" color={colors.gray1}>
-              henryjeff
-            </Text>
-          </NavbarOption>
-        </NavbarSection>
-      </Navbar>
-      <div style={styles.body}>
-        <div style={styles.form}>
-          <TitleText>SIGN UP</TitleText>
-          <HeaderText small style={{ marginBottom: 20 }} color={colors.gray1}>
-            Welcome to the club
-          </HeaderText>
-          <TextInput
-            icon="User"
-            placeholderText="Username"
-            onChange={(e) => {
-              console.log(e.target.value);
-            }}
-          />
-          <TextInput
-            icon="Mail"
-            placeholderText="Email"
-            onChange={(e) => {
-              console.log("e.target.value");
-            }}
-          />
-          <TextInput
-            icon="Key"
-            inputType="password"
-            placeholderText="Password"
-            onChange={(e) => {
-              console.log("e.target.value");
-            }}
-          />
-          <TextInput
-            icon="Key"
-            inputType="password"
-            placeholderText="Re-type Password"
-            onChange={(e) => {
-              console.log("e.target.value");
-            }}
-          />
-          <Button buttonText="SIGN UP" />
+    <Router>
+      <div className="app">
+        <TopNavigation />
+        <div style={styles.body}>
+          <Switch>
+            <Route exact path="/signup" component={SignUp} />
+            <Route exact path="/signin" component={SignIn} />
+            <PrivateRoute exact path="/dashboard" component={Dashboard} />
+          </Switch>
         </div>
-        {/* <div style={styles.dashboard}>
-          <div style={styles.strategies}>
-            <Text>Strats</Text>
-          </div>
-          <div style={styles.metrics}>
-            <Text>Metrics</Text>
-          </div>
-        </div> */}
       </div>
-    </div>
+    </Router>
   );
 }
 
 const styles: StyleSheet = {
-  dashboard: {
-    display: "flex",
-    width: "85%",
-    flexGrow: 1,
-    backgroundColor: colors.red,
-  },
-  strategies: {
-    flex: 1,
-    minWidth: 200,
-    backgroundColor: colors.green,
-  },
-  metrics: {
-    flex: 3,
-    backgroundColor: "blue",
-  },
-  form: {
-    marginTop: "-10vh",
-    width: "25%",
-    textAlign: "center",
-    justifyContent: "center",
-    alignItems: "center",
-    display: "flex",
-    flexDirection: "column",
-  },
   body: {
-    justifyContent: "center",
     alignItems: "center",
     display: "flex",
     flexDirection: "column",
     flex: 1,
-    // backgroundColor: "blue",
   },
 };
 
