@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, FontStyle } from "../../constants/Styles";
 import colors from "../../constants/Colors";
 import LoadingIndicator from "../general/LoadingIndicator";
-
+import { Text } from "../general";
 export interface ButtonProps {
   containerStyles?: React.CSSProperties;
   isLoading?: boolean;
@@ -61,7 +61,7 @@ const Button: React.FC<ButtonProps> = ({
           onClick={onClick}
           style={buttonStyle}
         >
-          <p>{buttonText.toUpperCase()}</p>
+          <Text weight="bold">{buttonText.toUpperCase()}</Text>
         </button>
       )}
     </div>
@@ -86,6 +86,7 @@ const styles = {
     padding: 0,
     display: "flex",
     outline: "none",
+    cursor: "pointer",
     ...FontStyle.bold,
   },
   hover: {

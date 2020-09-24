@@ -8,6 +8,7 @@ export interface TextInputProps {
   containerStyles?: React.CSSProperties;
   icon?: IconName;
   inputType?: string;
+  inputStyle?: React.CSSProperties;
   placeholderText?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -16,6 +17,7 @@ const TextInput: React.FC<TextInputProps> = ({
   containerStyles,
   icon,
   inputType,
+  inputStyle,
   placeholderText,
   onChange,
 }) => {
@@ -28,7 +30,12 @@ const TextInput: React.FC<TextInputProps> = ({
       ) : null}
       <input
         type={inputType}
-        style={Object.assign({}, styles.input, { textIndent: icon ? 28 : 12 })}
+        style={Object.assign(
+          {},
+          styles.input,
+          { textIndent: icon ? 28 : 12 },
+          inputStyle
+        )}
         onChange={onChange}
         placeholder={placeholderText}
       />
