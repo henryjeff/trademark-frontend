@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, FontStyle } from "../../constants/Styles";
+import { StyleSheet, FontStyle, BorderStyle } from "../../constants/Styles";
 import colors from "../../constants/Colors";
 import LoadingIndicator from "../general/LoadingIndicator";
 import { Text } from "../general";
@@ -8,6 +8,8 @@ export interface ButtonProps {
   isLoading?: boolean;
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   buttonText: string;
+  disabled?: boolean;
+  outline?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -15,6 +17,8 @@ const Button: React.FC<ButtonProps> = ({
   isLoading,
   onClick,
   buttonText,
+  disabled,
+  outline,
 }) => {
   const [isHovering, setIsHovering] = useState(false);
   const [isActive, setIsActive] = useState(false);
@@ -39,14 +43,17 @@ const Button: React.FC<ButtonProps> = ({
   const buttonStyle = Object.assign(
     {},
     styles.button,
-    isHovering && styles.hover,
-    isActive && styles.active
+    outline && styles.outline,
+    isHovering && (outline ? styles.hoverOutline : styles.hover),
+    isActive && (outline ? styles.activeOutline : styles.active),
+    isLoading && styles.buttonLoading,
+    disabled && styles.disabled
   );
 
   return (
-    <div style={Object.assign(styles.container, containerStyles)}>
+    <div style={Object.assign({}, styles.container, containerStyles)}>
       {isLoading ? (
-        <div style={styles.button}>
+        <div style={buttonStyle}>
           <LoadingIndicator
             containerStyles={styles.loading}
             color={colors.black}
@@ -70,7 +77,8 @@ const Button: React.FC<ButtonProps> = ({
 
 const styles = {
   container: {
-    margin: 8,
+    marginBottom: 8,
+    marginTop: 8,
     width: "100%",
   },
   button: {
@@ -84,10 +92,17 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     padding: 0,
+    paddingLeft: 16,
+    paddingRight: 16,
     display: "flex",
     outline: "none",
     cursor: "pointer",
     ...FontStyle.bold,
+  },
+  buttonLoading: {
+    paddingLeft: 0,
+    paddingRight: 0,
+    cursor: "default",
   },
   hover: {
     backgroundColor: `${colors.white}d8`,
@@ -97,6 +112,23 @@ const styles = {
   },
   loading: {
     paddingTop: 2,
+  },
+  disabled: {
+    cursor: "default",
+    backgroundColor: `${colors.white}68`,
+  },
+  outline: {
+    color: colors.white,
+    backgroundColor: "transparent",
+    ...BorderStyle.mediumWhite,
+  },
+  hoverOutline: {
+    borderColor: `${colors.white}b8`,
+    color: `${colors.white}b8`,
+  },
+  activeOutline: {
+    borderColor: `${colors.white}48`,
+    color: `${colors.white}48`,
   },
 };
 

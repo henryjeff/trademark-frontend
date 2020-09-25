@@ -49,13 +49,11 @@ const TopNavigation: React.FC<TopNavigationProps> = ({}) => {
             $100,000
           </Text>
         </NavbarOption> */}
-        <NavbarOption>
-          <Text weight="medium" color={colors.gray1}>
-            henryjeff
-          </Text>
+        <NavbarOption redirectTo="/account">
+          <Text weight="medium">henryjeff</Text>
         </NavbarOption>
         <NavbarOption onClick={signOut}>
-          <Icon style={styles.userDropDown} icon="DownArrow" />
+          <Icon style={styles.userDropDown} icon="SignOut" />
         </NavbarOption>
       </NavbarSection>
     </Navbar>
@@ -79,7 +77,7 @@ const TopNavigation: React.FC<TopNavigationProps> = ({}) => {
 
 const styles: StyleSheet = {
   userDropDown: {
-    width: 12,
+    width: 16,
     paddingTop: 4,
     opacity: 0.5,
   },

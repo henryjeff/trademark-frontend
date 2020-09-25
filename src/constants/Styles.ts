@@ -1,8 +1,46 @@
+import colors from "./Colors";
+
 export interface StyleSheet {
   [key: string]: React.CSSProperties;
 }
 
 export type FontWeights = "regular" | "medium" | "bold" | "black";
+
+export type BorderStyles = "white" | "gray" | "mediumWhite" | "mediumGray";
+
+export const StandardBorderStyle: React.CSSProperties = {
+  boxSizing: "border-box",
+  borderWidth: 1,
+  borderStyle: "solid",
+  borderRadius: 10,
+};
+
+export const BorderStyle: { [key in BorderStyles]: StyleSheet } = {
+  white: {
+    ...StandardBorderStyle,
+    //@ts-ignore
+    borderColor: colors.white,
+  },
+  gray: {
+    ...StandardBorderStyle,
+    //@ts-ignore
+    borderColor: colors.gray1,
+  },
+  mediumWhite: {
+    ...StandardBorderStyle,
+    //@ts-ignore
+    borderWidth: 2,
+    //@ts-ignore
+    borderColor: colors.white,
+  },
+  mediumGray: {
+    ...StandardBorderStyle,
+    //@ts-ignore
+    borderWidth: 2,
+    //@ts-ignore
+    borderColor: colors.gray1,
+  },
+};
 
 /*
   Font info:

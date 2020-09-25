@@ -16,9 +16,11 @@ import TopNavigation from "./components/view/navigation/TopNavigation";
 import SignUp from "./routes/auth/SignUp";
 import SignIn from "./routes/auth/SignIn";
 import Dashboard from "./routes/home/Dashboard";
+import UserAccount from "./routes/user/Account";
 
 function PrivateRoute({ ...rest }: any) {
   const tokenData = useTokenData();
+
   if (!tokenData?.accessToken) {
     return <Redirect to="/signin" />;
   }
@@ -35,6 +37,7 @@ function App() {
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/signin" component={SignIn} />
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
+            <PrivateRoute exact path="/account" component={UserAccount} />
           </Switch>
         </div>
       </div>

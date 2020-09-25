@@ -1,4 +1,4 @@
-import React, { useReducer, Reducer } from "react";
+import React, { useReducer, Reducer, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, Redirect, useHistory } from "react-router-dom";
 import { StyleSheet, FontStyle } from "../../constants/Styles";
@@ -57,6 +57,7 @@ const signInReducer: Reducer<SignInState, SignInAction> = (state, action) => {
         ...state,
         errorMessage: action.payload.errorMessage,
         errorLocations: action.payload.errorLocations,
+        isLoading: false,
       };
     default:
       return state;
@@ -70,6 +71,7 @@ const initialState: SignInState = {
 
 const SignIn: React.FC<SignInProps> = ({}) => {
   const [state, dispatch] = useReducer(signInReducer, initialState);
+
   const storeDispatch = useDispatch();
   const history = useHistory();
 
@@ -82,8 +84,13 @@ const SignIn: React.FC<SignInProps> = ({}) => {
         .then((res) => {
           const serverValidationRes = validateSignInResponse(res);
           if (serverValidationRes === "valid") {
-            console.log("successfully logged in");
-            history.push("/dashboard");
+            setTimeout(() => {
+              history.push("/dashboard");
+              dispatch({
+                type: "updateLoading",
+                payload: { isLoading: false },
+              });
+            }, 1000);
           } else {
             dispatch(serverValidationRes);
           }
@@ -110,7 +117,6 @@ const SignIn: React.FC<SignInProps> = ({}) => {
     } else {
       dispatch(validationRes);
     }
-    dispatch({ type: "updateLoading", payload: { isLoading: false } });
   };
 
   return (

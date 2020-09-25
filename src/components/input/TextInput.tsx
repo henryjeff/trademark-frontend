@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, FontStyle } from "../../constants/Styles";
+import { StyleSheet, FontStyle, BorderStyle } from "../../constants/Styles";
 import colors from "../../constants/Colors";
 import { IconName } from "../../assets/icons";
 import { Icon } from "../general";
@@ -10,6 +10,8 @@ export interface TextInputProps {
   inputType?: string;
   inputStyle?: React.CSSProperties;
   placeholderText?: string;
+  value?: string;
+  disabled?: boolean;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -19,23 +21,33 @@ const TextInput: React.FC<TextInputProps> = ({
   inputType,
   inputStyle,
   placeholderText,
+  value,
+  disabled,
   onChange,
 }) => {
+  const textInputStyle = Object.assign(
+    {},
+    styles.input,
+    { textIndent: icon ? 28 : 12 },
+    disabled && styles.disabled,
+    inputStyle
+  );
+
   return (
     <div style={Object.assign({}, styles.container, containerStyles)}>
       {icon ? (
         <div style={styles.iconContainer}>
-          <Icon style={styles.icon} icon={icon} />{" "}
+          <Icon
+            style={disabled ? styles.disabledIcon : styles.icon}
+            icon={icon}
+          />{" "}
         </div>
       ) : null}
       <input
         type={inputType}
-        style={Object.assign(
-          {},
-          styles.input,
-          { textIndent: icon ? 28 : 12 },
-          inputStyle
-        )}
+        style={textInputStyle}
+        value={value}
+        disabled={disabled}
         onChange={onChange}
         placeholder={placeholderText}
       />
@@ -46,7 +58,8 @@ const TextInput: React.FC<TextInputProps> = ({
 const styles: StyleSheet = {
   container: {
     position: "relative",
-    margin: 8,
+    marginBottom: 8,
+    marginTop: 8,
     width: "100%",
   },
   input: {
@@ -56,17 +69,23 @@ const styles: StyleSheet = {
     boxSizing: "border-box",
     lineHeight: 42,
     backgroundColor: "transparent",
-    borderWidth: 2,
-    borderColor: colors.white,
-    borderStyle: "solid",
-    borderRadius: 10,
     color: colors.white,
     width: "100%",
     outline: "none",
     ...FontStyle.regular,
+    ...BorderStyle.mediumWhite,
   },
   icon: {
     opacity: 0.5,
+    width: 12,
+  },
+  disabled: {
+    cursor: "not-allowed",
+    color: colors.gray1,
+    ...BorderStyle.mediumGray,
+  },
+  disabledIcon: {
+    opacity: 0.3,
     width: 12,
   },
   iconContainer: {

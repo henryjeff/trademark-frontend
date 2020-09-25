@@ -20,7 +20,6 @@ export interface SignUpState {
   firstName?: string;
   lastName?: string;
   email?: string;
-  username?: string;
   password?: string;
   rePassword?: string;
   isLoading: boolean;
@@ -33,7 +32,6 @@ export type SignUpAction =
       type: "updateInformation";
       payload:
         | { email: string }
-        | { username: string }
         | { password: string }
         | { rePassword: string }
         | { firstName: string }
@@ -67,6 +65,7 @@ const signUpReducer: Reducer<SignUpState, SignUpAction> = (state, action) => {
         ...state,
         errorMessage: action.payload.errorMessage,
         errorLocations: action.payload.errorLocations,
+        isLoading: false,
       };
     default:
       return state;
@@ -93,18 +92,20 @@ const SignUp: React.FC<SignUpProps> = ({}) => {
           first_name: state.firstName!,
           last_name: state.lastName!,
           email: state.email!,
-          username: state.username!,
           password: state.password!,
-          alpaca_key_id: "a",
-          alpaca_secret_key: "a",
         })
       )
         //@ts-ignore
         .then((res) => {
           const serverValidationRes = validateSignUpResponse(res);
           if (serverValidationRes === "valid") {
-            console.log("succeffuly created acct");
-            history.push("/signin");
+            setTimeout(() => {
+              history.push("/signin");
+              dispatch({
+                type: "updateLoading",
+                payload: { isLoading: false },
+              });
+            }, 1000);
           } else {
             dispatch(serverValidationRes);
           }
@@ -121,7 +122,6 @@ const SignUp: React.FC<SignUpProps> = ({}) => {
     } else {
       dispatch(validationRes);
     }
-    dispatch({ type: "updateLoading", payload: { isLoading: false } });
   };
 
   return (
@@ -133,7 +133,7 @@ const SignUp: React.FC<SignUpProps> = ({}) => {
       <div style={styles.nameContainer}>
         <TextInput
           icon="User"
-          containerStyles={{ marginLeft: 0 }}
+          containerStyles={{ marginRight: 6 }}
           placeholderText="First Name"
           inputStyle={
             state.errorLocations.includes(0) ? { borderColor: colors.red } : {}
@@ -148,7 +148,7 @@ const SignUp: React.FC<SignUpProps> = ({}) => {
         <TextInput
           icon="User"
           placeholderText="Last Name"
-          containerStyles={{ marginRight: 0 }}
+          containerStyles={{ marginLeft: 6 }}
           inputStyle={
             state.errorLocations.includes(1) ? { borderColor: colors.red } : {}
           }
@@ -160,19 +160,6 @@ const SignUp: React.FC<SignUpProps> = ({}) => {
           }}
         />
       </div>
-      <TextInput
-        icon="User"
-        placeholderText="Username"
-        inputStyle={
-          state.errorLocations.includes(2) ? { borderColor: colors.red } : {}
-        }
-        onChange={(e) => {
-          dispatch({
-            type: "updateInformation",
-            payload: { username: e.target.value },
-          });
-        }}
-      />
       <TextInput
         icon="Mail"
         placeholderText="Email"

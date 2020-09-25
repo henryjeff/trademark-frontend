@@ -26,15 +26,6 @@ export const validateSignUp = (state: SignUpState): SignUpAction | "valid" => {
       },
     };
   }
-  if (!state.username) {
-    return {
-      type: "updateErrors",
-      payload: {
-        errorMessage: "Please enter a username.",
-        errorLocations: [2],
-      },
-    };
-  }
   if (!state.email) {
     return {
       type: "updateErrors",
