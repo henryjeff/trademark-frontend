@@ -30,7 +30,7 @@ const NavbarOption: React.FC<NavbarOptionProps> = (props) => {
   );
 
   return (
-    <Link to={props.redirectTo || undefined} style={styles.routerLink}>
+    <Link to={props.redirectTo || "/"} style={styles.routerLink}>
       <div
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}

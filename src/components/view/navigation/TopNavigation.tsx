@@ -9,6 +9,7 @@ import { useTokenData } from "../../../store/selectors/AuthSelectors";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { authLogout } from "../../../store/actions/AuthActions";
+import { useUserEmail } from "../../../store/selectors/UserSelectors";
 
 interface TopNavigationProps {}
 
@@ -16,6 +17,8 @@ const TopNavigation: React.FC<TopNavigationProps> = ({}) => {
   const tokenData = useTokenData();
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const email = useUserEmail();
 
   const signOut = () => {
     dispatch(authLogout());
@@ -36,6 +39,9 @@ const TopNavigation: React.FC<TopNavigationProps> = ({}) => {
         <NavbarOption redirectTo="/dashboard">
           <Text weight="medium">Dashboard</Text>
         </NavbarOption>
+        <NavbarOption redirectTo="/search">
+          <Text weight="medium">Search</Text>
+        </NavbarOption>
       </NavbarSection>
       <NavbarSection justify="center">
         <Logo />
@@ -50,7 +56,7 @@ const TopNavigation: React.FC<TopNavigationProps> = ({}) => {
           </Text>
         </NavbarOption> */}
         <NavbarOption redirectTo="/account">
-          <Text weight="medium">henryjeff</Text>
+          <Text weight="medium">{email}</Text>
         </NavbarOption>
         <NavbarOption onClick={signOut}>
           <Icon style={styles.userDropDown} icon="SignOut" />
