@@ -10,6 +10,8 @@ import { PersistGate } from "redux-persist/integration/react";
 
 const target = document.querySelector("#root");
 
+// document.body = "background: red;";
+
 render(
   <Provider store={store}>
     <ConnectedRouter history={history}>

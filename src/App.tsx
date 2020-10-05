@@ -17,6 +17,7 @@ import SignUp from "./routes/auth/SignUp";
 import SignIn from "./routes/auth/SignIn";
 import Dashboard from "./routes/home/Dashboard";
 import UserAccount from "./routes/user/Account";
+import Search from "./routes/search/Search";
 
 function PrivateRoute({ ...rest }: any) {
   const tokenData = useTokenData();
@@ -30,7 +31,7 @@ function PrivateRoute({ ...rest }: any) {
 function App() {
   return (
     <Router>
-      <div className="app">
+      <body className="app">
         <TopNavigation />
         <div style={styles.body}>
           <Switch>
@@ -38,9 +39,10 @@ function App() {
             <Route exact path="/signin" component={SignIn} />
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
             <PrivateRoute exact path="/account" component={UserAccount} />
+            <PrivateRoute exact path="/search" component={Search} />
           </Switch>
         </div>
-      </div>
+      </body>
     </Router>
   );
 }

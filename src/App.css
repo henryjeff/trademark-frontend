@@ -9,41 +9,12 @@
   justify-content: center; */
 }
 
-.header {
-  font-size: 36px;
-  font-family: objektiv-mk3;
-  font-weight: 800;
-  font-style: normal;
-  margin: 0px;
+html {
+  overflow: hidden;
+  height: 100%;
 }
 
-.subtext {
-  color: #7c7c7c;
-  font-size: 16px;
-  font-family: objektiv-mk3;
-  font-weight: 500;
-  font-style: normal;
-  margin: 0px;
-  padding-bottom: 16px;
-}
-
-.button {
-  width: 310px;
-  height: 32px;
-  color: black;
-  background-color: white;
-  font-family: objektiv-mk3;
-  font-weight: 700;
-  font-size: 12px;
-  border: none;
-  border-radius: 10px;
-  outline: none;
-}
-
-button:hover {
-  background-color: #ffffffd8;
-}
-
-button:active {
-  background-color: #ffffff88;
+body {
+  overflow: auto;
+  height: 100%;
 }
