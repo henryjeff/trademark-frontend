@@ -100,11 +100,11 @@ const SignUp: React.FC<SignUpProps> = ({}) => {
           const serverValidationRes = validateSignUpResponse(res);
           if (serverValidationRes === "valid") {
             setTimeout(() => {
-              history.push("/signin");
               dispatch({
                 type: "updateLoading",
                 payload: { isLoading: false },
               });
+              history.push("/signin");
             }, 1000);
           } else {
             dispatch(serverValidationRes);

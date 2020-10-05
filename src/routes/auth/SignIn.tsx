@@ -13,6 +13,7 @@ import { TextInput } from "../../components/input";
 import { Button } from "../../components/button";
 import { validateSignIn, validateSignInResponse } from "../../util/AuthChecks";
 import { authLogin } from "../../store/actions/AuthActions";
+import { loadUser } from "../../store/actions/UserActions";
 
 export interface SignInProps {}
 
@@ -80,16 +81,17 @@ const SignIn: React.FC<SignInProps> = ({}) => {
     const validationRes = validateSignIn(state);
     if (validationRes === "valid") {
       storeDispatch(authLogin(state.email!, state.password!))
-        //@ts-ignore
+        // @ts-ignore
         .then((res) => {
           const serverValidationRes = validateSignInResponse(res);
           if (serverValidationRes === "valid") {
             setTimeout(() => {
-              history.push("/dashboard");
               dispatch({
                 type: "updateLoading",
                 payload: { isLoading: false },
               });
+              storeDispatch(loadUser());
+              history.push("/dashboard");
             }, 1000);
           } else {
             dispatch(serverValidationRes);

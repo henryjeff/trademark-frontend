@@ -2,9 +2,10 @@ import React, { useReducer, Reducer } from "react";
 import { useDispatch } from "react-redux";
 import { StyleSheet, BorderStyle } from "../../constants/Styles";
 import colors from "../../constants/Colors";
-import { TitleText, Text, Subtext } from "../../components/general";
+import { TitleText, Text, Subtext, HeaderText } from "../../components/general";
 import { TextInput } from "../../components/input";
 import { Button } from "../../components/button";
+import { useUserEmail, useUserName } from "../../store/selectors/UserSelectors";
 
 export interface AccountProps {}
 
@@ -81,9 +82,9 @@ const Account: React.FC<AccountProps> = ({}) => {
 
   const storeDispatch = useDispatch();
 
-  const firstName = "Henry";
-  const lastName = "Heffernan";
-  const email = "henryheffernan@gmail.com";
+  const email = useUserEmail();
+  const { firstName, lastName } = useUserName();
+
   const password = "password";
 
   const getButtonText = (isDisabled: boolean) =>
@@ -239,7 +240,7 @@ const styles: StyleSheet = {
   },
   infoBody: {},
   infoHeader: {
-    marginBottom: 32,
+    marginBottom: 16,
   },
   infoRow: {
     display: "flex",

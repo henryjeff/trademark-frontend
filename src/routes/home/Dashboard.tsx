@@ -1,9 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { BorderStyle, StyleSheet } from "../../constants/Styles";
-import colors from "../../constants/Colors";
-import { Text } from "../../components/general";
-import { Button } from "../../components/button";
+import { StyleSheet } from "../../constants/Styles";
 import BigTicker from "../../components/view/ticker/BigTicker";
 import BasicStockGraph from "../../components/view/graphs/BasicStockGraph";
 export interface DashboardProps {}
