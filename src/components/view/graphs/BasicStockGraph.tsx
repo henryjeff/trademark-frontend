@@ -36,7 +36,7 @@ const BasicStockGraph: React.FC<BasicStockGraphProps> = ({}) => {
 
   useEffect(() => {
     getData().then((data) => {
-      const newData = data.slice(Math.max(data.length - 365, 0));
+      const newData = data.slice(Math.max(data.length - 10, 0));
       // const newData = data;
       setDataMin(
         newData.reduce(
@@ -74,67 +74,65 @@ const BasicStockGraph: React.FC<BasicStockGraphProps> = ({}) => {
   };
 
   return (
-    <div style={styles.container}>
-      <ResponsiveContainer height={"80%"}>
-        <LineChart data={data}>
-          <Tooltip
-            cursor={{
-              stroke: colors.gray1,
-              strokeWidth: 1,
-              strokeDasharray: "4 8",
-            }}
-            animationDuration={50}
-            content={showTooltipData}
-          />
-          {/* <ReferenceLine
-            y={dataMin}
-            strokeWidth={0.5}
-            stroke={colors.red}
-            strokeDasharray={"4 8"}
-          />
-          <ReferenceLine
-            y={dataMax}
-            strokeWidth={0.5}
-            stroke={colors.green}
-            strokeDasharray={"4 8"}
-          /> */}
-          <Line
-            type="monotone"
-            dataKey="close"
-            strokeWidth={2}
-            stroke={colors.white}
-            dot={false}
-            animationDuration={1000}
-            animationEasing="ease"
-            // isAnimationActive={false}
-          />
-          <YAxis
-            axisLine={false}
-            type="number"
-            tick={{ ...styles.yAxisTick }}
-            domain={[dataMin - 1, dataMax + 1]}
-            ticks={[dataMin, dataMax]}
-            tickFormatter={(tick: number) => {
-              return `$${tick.toFixed(2)}`;
-            }}
-          />
-          <XAxis axisLine={false} dataKey="date" />
-        </LineChart>
-      </ResponsiveContainer>
-      <div style={styles.ranges}>
-        {dataRanges.map((range) => {
-          return (
-            <div style={styles.button}>
-              <Button
-                outline
-                buttonText={range.name}
-                // onClick={() => handleRangeChange(range.range)}
-              />
-            </div>
-          );
-        })}
-      </div>
-    </div>
+    <ResponsiveContainer width="99%" height={"80%"}>
+      <LineChart data={data}>
+        <Tooltip
+          cursor={{
+            stroke: colors.gray1,
+            strokeWidth: 1,
+            strokeDasharray: "4 8",
+          }}
+          animationDuration={50}
+          content={showTooltipData}
+        />
+        {/* <ReferenceLine
+          y={dataMin}
+          strokeWidth={0.5}
+          stroke={colors.red}
+          strokeDasharray={"4 8"}
+        />
+        <ReferenceLine
+          y={dataMax}
+          strokeWidth={0.5}
+          stroke={colors.green}
+          strokeDasharray={"4 8"}
+        /> */}
+        <Line
+          type="monotone"
+          dataKey="close"
+          strokeWidth={2}
+          stroke={colors.white}
+          dot={false}
+          animationDuration={1000}
+          animationEasing="ease"
+          // isAnimationActive={false}
+        />
+        <YAxis
+          axisLine={false}
+          type="number"
+          tick={{ ...styles.yAxisTick }}
+          domain={[dataMin - 1, dataMax + 1]}
+          ticks={[dataMin, dataMax]}
+          tickFormatter={(tick: number) => {
+            return `$${tick.toFixed(2)}`;
+          }}
+        />
+        <XAxis axisLine={false} dataKey="date" />
+      </LineChart>
+    </ResponsiveContainer>
+    // {/* <div style={styles.ranges}>
+    //   {dataRanges.map((range) => {
+    //     return (
+    //       <div key={range.name} style={styles.button}>
+    //         <Button
+    //           outline
+    //           buttonText={range.name}
+    //           // onClick={() => handleRangeChange(range.range)}
+    //         />
+    //       </div>
+    //     );
+    //   })}
+    // </div> */}
   );
 };
 
