@@ -1,5 +1,6 @@
 declare type RootState = {
   Auth: AuthState;
+  User: UserState;
 };
 
 declare type AuthState = {
@@ -12,5 +13,5 @@ declare type AuthState = {
 };
 
 declare type UserState = {
-  userId: number;
+  user: UserResponseDto;
 };

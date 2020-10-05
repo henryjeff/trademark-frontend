@@ -5,12 +5,15 @@ import * as History from "history";
 import rootReducer from "./reducers";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import { ActionType } from "./ActionTypes";
 
 export const history = History.createBrowserHistory();
 
 const initialState = {};
 const enhancers = [];
 const middleware = [thunk, routerMiddleware(history)];
+
+// storage.removeItem("persist:root");
 
 if (process.env.NODE_ENV === "development") {
   //@ts-ignore
@@ -28,12 +31,18 @@ const persistConfig = {
 
 const composedEnhancers = compose(applyMiddleware(...middleware), ...enhancers);
 
-// export default createStore(
-//   rootReducer(history),
-//   initialState,
-//   composedEnhancers
-// );'
-const persistedReducer = persistReducer(persistConfig, rootReducer(history));
+const reducers = (state: any, action: any) => {
+  if (action.type === ActionType.LOG_OUT) {
+    // for all keys defined in your persistConfig(s)
+    // console.log("logout");
+    storage.removeItem("persist:root");
+    // eslint-disable-next-line no-param-reassign
+    state = undefined;
+  }
+  return rootReducer(history)(state, action);
+};
+
+const persistedReducer = persistReducer(persistConfig, reducers);
 
 export const store = createStore(
   persistedReducer,

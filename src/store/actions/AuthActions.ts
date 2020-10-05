@@ -52,3 +52,16 @@ export const authLogout = () => (
 ) => {
   return dispatch({ type: ActionType.LOG_OUT, payload: {} });
 };
+
+interface AuthRefreshAccessToken {
+  type: typeof ActionType.REFRESH_TOKEN;
+  payload: {};
+}
+
+export const authRefreshAccessToken = (refreshToken: string) => (
+  dispatch: (a: AuthRefreshAccessToken) => any,
+  getState: () => RootState
+) => {
+  return;
+  // return dispatch({ type: ActionType.LOG_OUT, payload: {} });
+};
