@@ -39,6 +39,8 @@ const Text: React.FC<TextProps> = (props) => {
 const styles: StyleSheet = {
   text: {
     fontSize: 14,
+    // textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
     ...FontStyle.regular,
   },
   verticalPadding: {

@@ -8,16 +8,17 @@ export interface MoneyTextProps extends TextProps {
   amount: number;
   label?: string;
   change?: number;
+  containerStyle?: React.CSSProperties;
 }
 
 const MoneyText: React.FC<MoneyTextProps> = (props) => {
-  const { amount, change, label } = props;
+  const { amount, change, label, containerStyle } = props;
 
   const fontSize = props.fontSize || 24;
   const superScriptSize = fontSize / 2;
 
   return (
-    <div>
+    <div style={containerStyle}>
       <Subtext>{label}</Subtext>
       <div style={styles.container}>
         <Text fontSize={fontSize} color={colors.white} weight="bold" {...props}>
