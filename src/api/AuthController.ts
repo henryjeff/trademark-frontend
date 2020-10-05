@@ -30,7 +30,7 @@ export class AuthController {
   }
 
   /**
-   * Create user
+   * Login user to get our tokens
    */
   static login(
     params: {
@@ -52,6 +52,34 @@ export class AuthController {
       const data = {
         email: params.email,
         password: params.password,
+      };
+
+      configs.data = data;
+      axios(configs, resolve, reject);
+    });
+  }
+
+  /**
+   * Refresh our token
+   */
+  static refreshToken(
+    params: {
+      refreshToken: string;
+    } = {} as any,
+    options: IRequestOptions = {}
+  ): Promise<AuthTokenRefreshResponseDto> {
+    return new Promise((resolve, reject) => {
+      const url = "auth/token/refresh";
+
+      const configs: IRequestConfig = getConfigs(
+        "post",
+        "application/json",
+        url,
+        options
+      );
+
+      const data = {
+        refresh: params.refreshToken,
       };
 
       configs.data = data;
