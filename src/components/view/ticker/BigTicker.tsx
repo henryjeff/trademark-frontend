@@ -27,17 +27,17 @@ const BigTicker: React.FC<BigTickerProps> = ({
 
   const change = 0.5;
 
-  const update = () => {
-    setTimeout(() => {
-      const change = Number((Math.random() * 0.05).toFixed(2));
-      setPrice(Math.random() > 0.5 ? price + change : price - change);
-      update();
-    }, 2000);
-  };
+  // const update = () => {
+  //   setTimeout(() => {
+  //     const change = Number((Math.random() * 0.05).toFixed(2));
+  //     setPrice(Math.random() > 0.5 ? price + change : price - change);
+  //     update();
+  //   }, 2000);
+  // };
 
-  useEffect(() => {
-    update();
-  }, []);
+  // useEffect(() => {
+  //   update();
+  // }, []);
 
   return (
     <div style={styles.container}>

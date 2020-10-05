@@ -3,6 +3,10 @@ declare interface AuthTokenResponseDto {
   refresh: string;
 }
 
+declare interface AuthTokenRefreshResponseDto {
+  access: string;
+}
+
 declare interface UserCreateRequestDto {
   email: string;
   password: string;
