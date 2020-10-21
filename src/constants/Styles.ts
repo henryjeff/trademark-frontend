@@ -6,7 +6,12 @@ export interface StyleSheet {
 
 export type FontWeights = "regular" | "medium" | "bold" | "black";
 
-export type BorderStyles = "white" | "gray" | "mediumWhite" | "mediumGray";
+export type BorderStyles =
+  | "white"
+  | "gray"
+  | "mediumWhite"
+  | "mediumGray"
+  | "lightGray";
 
 export const StandardBorderStyle: React.CSSProperties = {
   boxSizing: "border-box",
@@ -39,6 +44,11 @@ export const BorderStyle: { [key in BorderStyles]: StyleSheet } = {
     borderWidth: 2,
     //@ts-ignore
     borderColor: colors.gray1,
+  },
+  lightGray: {
+    ...StandardBorderStyle,
+    //@ts-ignore
+    borderColor: `${colors.gray1}83`,
   },
 };
 

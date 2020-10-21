@@ -36,12 +36,12 @@ const TickerItem: React.FC<TickerItemProps> = ({ ticker, containerStyle }) => {
             change={20.4}
             label="PRICE"
           />
-          {/* <div style={styles.range}>
+          <div style={styles.range}>
             <Subtext>DAILY RANGE</Subtext>
             <Text fontSize={24} weight="black">
               128.90 - 155.49
             </Text>
-          </div> */}
+          </div>
           {/* <div style={styles.company}>
             <Subtext>COMPANY</Subtext>
             <Text fontSize={24} weight="bold">

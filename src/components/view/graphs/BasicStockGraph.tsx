@@ -36,7 +36,7 @@ const BasicStockGraph: React.FC<BasicStockGraphProps> = ({}) => {
 
   useEffect(() => {
     getData().then((data) => {
-      const newData = data.slice(Math.max(data.length - 10, 0));
+      const newData = data.slice(Math.max(data.length - 90, 0));
       // const newData = data;
       setDataMin(
         newData.reduce(
@@ -117,7 +117,7 @@ const BasicStockGraph: React.FC<BasicStockGraphProps> = ({}) => {
             return `$${tick.toFixed(2)}`;
           }}
         />
-        <XAxis axisLine={false} dataKey="date" />
+        <XAxis axisLine={true} tick={false} dataKey="date" />
       </LineChart>
     </ResponsiveContainer>
     // {/* <div style={styles.ranges}>

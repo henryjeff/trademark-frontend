@@ -27,6 +27,11 @@ const styles: StyleSheet = {
     borderBottomWidth: 1,
     borderColor: `${colors.gray1}48`,
     borderStyle: "solid",
+    backgroundColor: colors.black,
+    position: "fixed",
+    width: "100%",
+    top: 0,
+    zIndex: 1000,
   },
 };
 
