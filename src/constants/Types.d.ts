@@ -20,3 +20,9 @@ declare interface UserResponseDto {
   first_name: string;
   last_name: string;
 }
+
+declare interface UserUpdateInfoDto {
+    password: string;
+    new_email: string;
+    new_password: string;
+}

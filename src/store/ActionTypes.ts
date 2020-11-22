@@ -4,4 +4,5 @@ export enum ActionType {
   LOG_OUT = "LOG_OUT",
   REFRESH_TOKEN = "REFRESH_TOKEN",
   LOAD_USER = "LOAD_USER",
+  UPDATE_USER_INFO = "UPDATE_USER_INFO",
 }

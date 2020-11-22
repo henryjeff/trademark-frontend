@@ -85,5 +85,7 @@ export class AuthController {
       configs.data = data;
       axios(configs, resolve, reject);
     });
-  }
+   }
+
+
 }
