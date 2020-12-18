@@ -3,6 +3,7 @@ import { StyleSheet, FontStyle, BorderStyle } from "../../constants/Styles";
 import colors from "../../constants/Colors";
 import LoadingIndicator from "../general/LoadingIndicator";
 import { Text } from "../general";
+import { TextProps } from "../general/Text";
 export interface ButtonProps {
   containerStyles?: React.CSSProperties;
   isLoading?: boolean;
@@ -10,6 +11,9 @@ export interface ButtonProps {
   buttonText: string;
   disabled?: boolean;
   outline?: boolean;
+  buttonStyles?: React.CSSProperties;
+  buttonTextProps?: TextProps;
+  enforceUppercase?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -19,6 +23,9 @@ const Button: React.FC<ButtonProps> = ({
   buttonText,
   disabled,
   outline,
+  buttonStyles,
+  buttonTextProps,
+  enforceUppercase,
 }) => {
   const [isHovering, setIsHovering] = useState(false);
   const [isActive, setIsActive] = useState(false);
@@ -47,7 +54,8 @@ const Button: React.FC<ButtonProps> = ({
     isHovering && (outline ? styles.hoverOutline : styles.hover),
     isActive && (outline ? styles.activeOutline : styles.active),
     isLoading && styles.buttonLoading,
-    disabled && styles.disabled
+    disabled && styles.disabled,
+    buttonStyles
   );
 
   return (
@@ -68,7 +76,9 @@ const Button: React.FC<ButtonProps> = ({
           onClick={onClick}
           style={buttonStyle}
         >
-          <Text weight="bold">{buttonText.toUpperCase()}</Text>
+          <Text weight="bold" {...buttonTextProps}>
+            {enforceUppercase === false ? buttonText : buttonText.toUpperCase()}
+          </Text>
         </button>
       )}
     </div>
