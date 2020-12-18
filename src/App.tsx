@@ -9,6 +9,8 @@ import {
 import { useTokenData } from "./store/selectors/AuthSelectors";
 import { StyleSheet } from "./constants/Styles";
 
+//@ts-ignore
+import { AnimatedSwitch } from "react-router-transition";
 // Navigation
 import TopNavigation from "./components/view/navigation/TopNavigation";
 
@@ -48,6 +50,8 @@ function App() {
     </Router>
   );
 }
+
+//https://medium.com/@khwsc1/step-by-step-guide-of-simple-routing-transition-effect-for-react-with-react-router-v4-and-9152db1566a0
 
 const styles: StyleSheet = {
   body: {
